@@ -105,7 +105,9 @@ protected housingLocationList: HousingLocation[] = [{
   wifi: true,
   laundry: true
 }];
-  constructor() { }
+  constructor() { 
+    
+  }
 
   getAllHousingLocations(): HousingLocation[] {
     return this.housingLocationList;
