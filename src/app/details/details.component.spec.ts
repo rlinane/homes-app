@@ -1,7 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { CommonModule } from '@angular/common';
 import { DetailsComponent } from './details.component';
 import { HousingService } from '../housing.service';
-import { HousingLocation } from '../housing-location'; // Import the 'HousingLocation' type
+import { HousingLocation } from '../housinglocation'; // Import the 'HousingLocation' type
+import { ActivatedRoute } from '@angular/router';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'; 
+
 
 describe('DetailsComponent', () => {
   let component: DetailsComponent;
@@ -34,7 +38,9 @@ describe('DetailsComponent', () => {
 
     TestBed.configureTestingModule({
       imports: [DetailsComponent],
-      providers: [{ provide: HousingService, useValue: mockService }]
+      providers: [
+        { provide: HousingService, useValue: mockService },
+        ActivatedRoute]
     });
     fixture = TestBed.createComponent(DetailsComponent);
     component = fixture.componentInstance;

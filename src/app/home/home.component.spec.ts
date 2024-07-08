@@ -24,7 +24,7 @@ describe('HomeComponent', () => {
       {
         id: 1,
         name: "Test Housing Location",
-        city: "Test City",
+        city: "Test City 1",
         state: "TS",
         photo: "test.jpg",
         availableUnits: 5,
@@ -43,12 +43,12 @@ describe('HomeComponent', () => {
       }
     ];
 
-    component.filterResults('Test Housing Location');
-    expect(component.filterResults.length).toBe(1);
-    expect(component.filterResults.name).toBe('Test Housing Location');
+    component.filterResults('Test City 1');
+    expect(component.filteredLocationList.length).toBe(1);
+    expect(component.filteredLocationList[0].name).toBe('Test Housing Location');
 
     component.filterResults('');
-    expect(component.filterResults.length).toBe(0);
+    expect(component.filteredLocationList.length).toBe(2);
 
   });
 
