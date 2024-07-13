@@ -56,5 +56,9 @@ describe('DetailsComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+    component?.applyForm?.controls['firstName'].setValue(null);
+    component?.applyForm?.controls['lastName'].setValue(null);
+    component?.applyForm?.controls['email'].setValue(null);
+    component.submitApplication();
   });
 });
