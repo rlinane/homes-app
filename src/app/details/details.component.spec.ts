@@ -5,11 +5,21 @@ import { HousingService } from '../housing.service';
 import { HousingLocation } from '../housinglocation'; // Import the 'HousingLocation' type
 import { ActivatedRoute } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'; 
+import { RouterTestingModule } from '@angular/router/testing';
 
 
 describe('DetailsComponent', () => {
   let component: DetailsComponent;
   let fixture: ComponentFixture<DetailsComponent>;
+
+  const fakeActivatedRoute = {
+    snapshot: {
+      data: {},
+      params: {
+        id: 1
+      }
+    }
+  } as unknown as ActivatedRoute;
 
   beforeEach(() => {
     const mockHousingLocation: HousingLocation = {
@@ -23,24 +33,22 @@ describe('DetailsComponent', () => {
       laundry: true
 
     }
-    const mockService = {
-      getHousingLocationById: () => {
-        {return mockHousingLocation;};
-      },
-      getAllHousingLocations: () => {
-        {return mockHousingLocation;};
-      },
-      submitApplication: (firstName: string, lastName: string, email: string) => {
-        console.log(`Application submitted for ${firstName} ${lastName} at ${email}`);
-      },
-      url: 'http://localhost:3000/locations'
-    };
+
+    let housingService = jasmine.createSpyObj('HousingService', ['getHousingLocationById', 'getAllHousingLocations', 'submitApplication', 'url']);
+    housingService.getHousingLocationById.and.returnValue(Promise.resolve(mockHousingLocation));
+    housingService.getAllHousingLocations.and.returnValue(Promise.resolve([mockHousingLocation]));
+    housingService.submitApplication.and.callFake(() => {
+      console.log(`Application submitted for ${mockHousingLocation.name} at ${mockHousingLocation.city}`);
+    }
+    );
+    housingService.url.and.returnValue('http://localhost:3000/locations');
 
     TestBed.configureTestingModule({
-      imports: [DetailsComponent],
+      imports: [DetailsComponent, RouterTestingModule],
       providers: [
-        { provide: HousingService, useValue: mockService },
-        ActivatedRoute]
+        { provide: HousingService, useValue: housingService },
+        {provide: ActivatedRoute, useValue: fakeActivatedRoute}
+      ]
     });
     fixture = TestBed.createComponent(DetailsComponent);
     component = fixture.componentInstance;
