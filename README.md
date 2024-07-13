@@ -18,3 +18,7 @@
 - Run the application 
 
   `ng serve`
+
+  Uses the json server which must be running in the background 
+  json-server --watch db.json
+  
