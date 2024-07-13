@@ -19,6 +19,15 @@ describe('HousingService', () => {
     const locations = service.getAllHousingLocations();
     console.log(locations.then.length);
     expect(locations.then.length).toBeGreaterThan(0);
+
+    service.getHousingLocationById(1);
+    service.getAllHousingLocations();
+    service.getHousingLocationById(1000);
+    service.url = '';
+    service.getAllHousingLocations();
+    service.getHousingLocationById(1);
+    service.getHousingLocationById(1000);
+
     service.submitApplication('John', 'Doe', 'john.doe@email.com');
 
   });
