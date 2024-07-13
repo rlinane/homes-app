@@ -1,10 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { CommonModule } from '@angular/common';
 import { DetailsComponent } from './details.component';
 import { HousingService } from '../housing.service';
-import { HousingLocation } from '../housinglocation'; // Import the 'HousingLocation' type
+import { HousingLocation } from '../housinglocation'; 
 import { ActivatedRoute } from '@angular/router';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'; 
 import { RouterTestingModule } from '@angular/router/testing';
 
 
@@ -52,6 +50,7 @@ describe('DetailsComponent', () => {
     });
     fixture = TestBed.createComponent(DetailsComponent);
     component = fixture.componentInstance;
+    component.submitApplication();
     fixture.detectChanges();
   });
 
