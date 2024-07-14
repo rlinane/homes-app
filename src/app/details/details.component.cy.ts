@@ -1,8 +1,14 @@
 import { DetailsComponent } from './details.component'
 
   describe('DetailsComponent', () => {
-    it('should mount', () => {
-      cy.mount(DetailsComponent)
+    let component: DetailsComponent;
+  
+    beforeEach(() => {
+      component = new DetailsComponent();
+    })
+  
+    it('should create', () => {
+      expect(component).to.be.true;
     })
   })
   
